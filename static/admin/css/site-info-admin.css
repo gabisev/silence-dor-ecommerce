@@ -1,0 +1,353 @@
+/* Styles personnalisés pour l'administration des informations du site */
+
+.site-info-preview {
+    background: linear-gradient(135deg, #e91e63, #ffc107);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+}
+
+.site-info-preview h3 {
+    margin: 0 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.site-info-preview p {
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+.field-preview_info {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.field-preview_info h4 {
+    color: #e91e63;
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.field-preview_info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Amélioration du champ image hero */
+.field-hero_image {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.field-hero_image input[type="file"] {
+    margin: 10px 0;
+    padding: 8px;
+    border: 2px dashed #ff9800;
+    border-radius: 5px;
+    background: #fff8e1;
+    width: 100%;
+}
+
+.field-hero_image .help {
+    color: #f57c00;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+/* Amélioration des champs de contact */
+.field-contact_email,
+.field-contact_phone,
+.field-contact_address {
+    background: #e8f5e8;
+    border-left: 4px solid #28a745;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Amélioration des champs de réseaux sociaux */
+.field-facebook_url,
+.field-instagram_url,
+.field-twitter_url,
+.field-linkedin_url {
+    background: #e3f2fd;
+    border-left: 4px solid #2196f3;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Amélioration des champs légaux */
+.field-company_name,
+.field-siret_number,
+.field-vat_number {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Amélioration des champs financiers */
+.field-currency,
+.field-currency_symbol {
+    background: #f3e5f5;
+    border-left: 4px solid #9c27b0;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Amélioration des champs SEO */
+.field-meta_keywords,
+.field-google_analytics_id {
+    background: #e0f2f1;
+    border-left: 4px solid #4caf50;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+/* Boutons d'action personnalisés */
+.button.edit-link {
+    background: linear-gradient(135deg, #e91e63, #ffc107);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.button.edit-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .site-info-preview {
+        padding: 15px;
+    }
+    
+    .site-info-preview h3 {
+        font-size: 20px;
+    }
+    
+    .field-preview_info {
+        padding: 10px;
+    }
+}
+
+/* Amélioration des champs de sélection */
+.field-company_name input,
+.field-currency input,
+.field-currency_symbol input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ff9800;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-company_name input:focus,
+.field-currency input:focus,
+.field-currency_symbol input:focus {
+    outline: none;
+    border-color: #f57c00;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+}
+
+/* Amélioration des champs de contact */
+.field-contact_email input,
+.field-contact_phone input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #28a745;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-contact_email input:focus,
+.field-contact_phone input:focus {
+    outline: none;
+    border-color: #1e7e34;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}
+
+/* Amélioration des champs de réseaux sociaux */
+.field-facebook_url input,
+.field-instagram_url input,
+.field-twitter_url input,
+.field-linkedin_url input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #6f42c1;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-facebook_url input:focus,
+.field-instagram_url input:focus,
+.field-twitter_url input:focus,
+.field-linkedin_url input:focus {
+    outline: none;
+    border-color: #5a32a3;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.1);
+}
+
+/* Amélioration des champs SEO */
+.field-meta_keywords input,
+.field-google_analytics_id input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #fd7e14;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-meta_keywords input:focus,
+.field-google_analytics_id input:focus {
+    outline: none;
+    border-color: #e8590c;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.1);
+}
+
+/* Amélioration des champs de base */
+.field-site_name input,
+.field-site_tagline input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #007cba;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-site_name input:focus,
+.field-site_tagline input:focus {
+    outline: none;
+    border-color: #005a87;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.1);
+}
+
+/* Amélioration des textarea */
+.field-site_description textarea,
+.field-contact_address textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #007cba;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.field-site_description textarea:focus,
+.field-contact_address textarea:focus {
+    outline: none;
+    border-color: #005a87;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 124, 186, 0.1);
+}
+
+/* Styles pour les champs obligatoires */
+.required-field {
+    position: relative;
+}
+
+.required-field::before {
+    content: "●";
+    color: #dc3545;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 10;
+}
+
+/* Styles pour les erreurs */
+.field-error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 3px;
+}
+
+input.error,
+textarea.error {
+    border-color: #dc3545 !important;
+    background: #fff5f5 !important;
+}
+
+input.error:focus,
+textarea.error:focus {
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1) !important;
+}
+
+/* Styles pour les tooltips */
+.help-tooltip {
+    cursor: help;
+    color: #6c757d;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.help-tooltip:hover {
+    color: #495057;
+}
+
+/* Amélioration de la visibilité des champs */
+.field-box {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.field-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour les champs de sélection spécifiques */
+.field-currency select,
+.field-currency_symbol select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ff9800;
+    border-radius: 5px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.field-currency select:focus,
+.field-currency_symbol select:focus {
+    outline: none;
+    border-color: #f57c00;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.1);
+}

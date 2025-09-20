@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Commande - Silence d'Or{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Finaliser la commande</h2>
+    
+    {% if cart_items %}
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                
+                <!-- Adresses -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Adresses</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Adresse de livraison</h6>
+                                {% for address in addresses %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="shipping_address" id="shipping_{{ address.id }}" value="{{ address.id }}" required>
+                                    <label class="form-check-label" for="shipping_{{ address.id }}">
+                                        {{ address.first_name }} {{ address.last_name }}<br>
+                                        {{ address.address_line_1 }}<br>
+                                        {{ address.city }}, {{ address.postal_code }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Adresse de facturation</h6>
+                                {% for address in addresses %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="billing_address" id="billing_{{ address.id }}" value="{{ address.id }}" required>
+                                    <label class="form-check-label" for="billing_{{ address.id }}">
+                                        {{ address.first_name }} {{ address.last_name }}<br>
+                                        {{ address.address_line_1 }}<br>
+                                        {{ address.city }}, {{ address.postal_code }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <a href="{% url 'accounts:address-create' %}" class="btn btn-outline-primary">Ajouter une adresse</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mode de paiement -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Mode de paiement</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" id="card" value="card" required>
+                            <label class="form-check-label" for="card">
+                                <i class="fas fa-credit-card"></i> Carte bancaire
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal">
+                            <label class="form-check-label" for="paypal">
+                                <i class="fab fa-paypal"></i> PayPal
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg">Confirmer la commande</button>
+            </form>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Résumé de la commande</h5>
+                </div>
+                <div class="card-body">
+                    {% for item in cart_items %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.product.name }} x{{ item.quantity }}</span>
+                        <span>{{ item.total_price }}€</span>
+                    </div>
+                    {% endfor %}
+                    
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <span>Sous-total :</span>
+                        <span>{{ cart.total_amount }}€</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Livraison :</span>
+                        <span>Gratuite</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>Total :</strong>
+                        <strong>{{ cart.total_amount }}€</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <h3>Votre panier est vide</h3>
+        <p class="text-muted">Ajoutez des produits à votre panier avant de passer commande.</p>
+        <a href="{% url 'products:product-list' %}" class="btn btn-primary">Voir les produits</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,297 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Commande #{{ order.id }} - {{ site_name }}{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <!-- En-tête de la commande -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1>
+                    <i class="fas fa-receipt me-2"></i>
+                    Commande #{{ order.id }}
+                </h1>
+                <span class="badge 
+                    {% if order.status == 'pending' %}bg-warning
+                    {% elif order.status == 'processing' %}bg-info
+                    {% elif order.status == 'shipped' %}bg-primary
+                    {% elif order.status == 'delivered' %}bg-success
+                    {% elif order.status == 'cancelled' %}bg-danger
+                    {% else %}bg-secondary{% endif %} fs-6">
+                    {{ order.get_status_display }}
+                </span>
+            </div>
+            
+            <!-- Informations de la commande -->
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- Articles de la commande -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Articles commandés
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            {% for item in order.items.all %}
+                            <div class="row align-items-center py-3 {% if not forloop.last %}border-bottom{% endif %}">
+                                <div class="col-md-2">
+                                    {% if item.product.images.first %}
+                                        <img src="{{ item.product.images.first.image.url }}" 
+                                             class="img-fluid rounded" 
+                                             alt="{{ item.product.name }}"
+                                             style="max-height: 80px; object-fit: cover;">
+                                    {% else %}
+                                        <div class="bg-light rounded d-flex align-items-center justify-content-center" 
+                                             style="height: 80px;">
+                                            <i class="fas fa-image text-muted"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="mb-1">{{ item.product.name }}</h6>
+                                    <small class="text-muted">{{ item.product.category.name }}</small>
+                                    <br>
+                                    <small class="text-muted">SKU: {{ item.product.sku }}</small>
+                                </div>
+                                <div class="col-md-2 text-center">
+                                    <span class="badge bg-light text-dark">{{ item.quantity }}</span>
+                                </div>
+                                <div class="col-md-2 text-end">
+                                    <strong>{{ item.price }}€</strong>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    
+                    <!-- Adresse de livraison -->
+                    {% if order.shipping_address %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-truck me-2"></i>
+                                Adresse de livraison
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <address class="mb-0">
+                                <strong>{{ order.shipping_address.first_name }} {{ order.shipping_address.last_name }}</strong><br>
+                                {{ order.shipping_address.address_line_1 }}<br>
+                                {% if order.shipping_address.address_line_2 %}{{ order.shipping_address.address_line_2 }}<br>{% endif %}
+                                {{ order.shipping_address.city }}, {{ order.shipping_address.postal_code }}<br>
+                                {{ order.shipping_address.country }}
+                            </address>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4">
+                    <!-- Résumé de la commande -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-calculator me-2"></i>
+                                Résumé
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Sous-total:</span>
+                                <span>{{ order.subtotal }}€</span>
+                            </div>
+                            {% if order.shipping_cost %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Livraison:</span>
+                                <span>{{ order.shipping_cost }}€</span>
+                            </div>
+                            {% endif %}
+                            {% if order.tax_amount %}
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>TVA:</span>
+                                <span>{{ order.tax_amount }}€</span>
+                            </div>
+                            {% endif %}
+                            {% if order.discount_amount %}
+                            <div class="d-flex justify-content-between mb-2 text-success">
+                                <span>Remise:</span>
+                                <span>-{{ order.discount_amount }}€</span>
+                            </div>
+                            {% endif %}
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <strong>Total:</strong>
+                                <strong class="text-primary">{{ order.total_amount }}€</strong>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Informations de la commande -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Informations
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <strong>Date de commande:</strong><br>
+                                <small class="text-muted">{{ order.created_at|date:"d/m/Y à H:i" }}</small>
+                            </div>
+                            
+                            {% if order.updated_at != order.created_at %}
+                            <div class="mb-3">
+                                <strong>Dernière mise à jour:</strong><br>
+                                <small class="text-muted">{{ order.updated_at|date:"d/m/Y à H:i" }}</small>
+                            </div>
+                            {% endif %}
+                            
+                            {% if order.tracking_number %}
+                            <div class="mb-3">
+                                <strong>Numéro de suivi:</strong><br>
+                                <code>{{ order.tracking_number }}</code>
+                            </div>
+                            {% endif %}
+                            
+                            {% if order.notes %}
+                            <div class="mb-3">
+                                <strong>Notes:</strong><br>
+                                <small class="text-muted">{{ order.notes }}</small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                {% if order.status == 'pending' %}
+                                <button class="btn btn-danger" onclick="cancelOrder({{ order.id }})">
+                                    <i class="fas fa-times me-2"></i>
+                                    Annuler la commande
+                                </button>
+                                {% endif %}
+                                
+                                <a href="{% url 'orders:order-list' %}" class="btn btn-outline-secondary">
+                                    <i class="fas fa-arrow-left me-2"></i>
+                                    Retour aux commandes
+                                </a>
+                                
+                                <a href="{% url 'products:product-list' %}" class="btn btn-outline-primary">
+                                    <i class="fas fa-shopping-cart me-2"></i>
+                                    Continuer mes achats
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmation d'annulation -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Annuler la commande</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir annuler la commande #{{ order.id }} ?</p>
+                <p class="text-muted">Cette action est irréversible.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non, garder</button>
+                <button type="button" class="btn btn-danger" id="confirmCancelBtn">Oui, annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function cancelOrder(orderId) {
+    // Afficher le modal de confirmation
+    const modal = new bootstrap.Modal(document.getElementById('cancelOrderModal'));
+    modal.show();
+    
+    // Gérer la confirmation
+    document.getElementById('confirmCancelBtn').onclick = function() {
+        // Faire la requête d'annulation
+        fetch(`/orders/api/${orderId}/cancel/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification('Commande annulée avec succès', 'success');
+                // Recharger la page
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            } else {
+                showNotification(data.error || 'Erreur lors de l\'annulation', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Une erreur est survenue', 'error');
+        });
+        
+        modal.hide();
+    };
+}
+
+// Fonction utilitaire pour récupérer le cookie CSRF
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Fonction pour afficher les notifications
+function showNotification(message, type) {
+    // Créer l'élément de notification
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+    
+    // Ajouter au DOM
+    document.body.appendChild(notification);
+    
+    // Supprimer automatiquement après 5 secondes
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+        }
+    }, 5000);
+}
+</script>
+{% endblock %}
+

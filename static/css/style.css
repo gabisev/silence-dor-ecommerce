@@ -1,0 +1,360 @@
+/* Silence d'Or - Custom Styles */
+
+:root {
+    --primary-color: #e91e63;
+    --secondary-color: #ffc107;
+    --success-color: #4caf50;
+    --danger-color: #f44336;
+    --warning-color: #ff9800;
+    --info-color: #2196f3;
+    --light-color: #ffffff;
+    --dark-color: #333333;
+    
+    /* Palette rose, jaune, blanc */
+    --rose-primary: #e91e63;
+    --rose-light: #f8bbd9;
+    --rose-dark: #c2185b;
+    --jaune-primary: #ffc107;
+    --jaune-light: #fff3cd;
+    --jaune-dark: #ff8f00;
+    --blanc: #ffffff;
+    --blanc-casse: #fafafa;
+    --gris-clair: #f5f5f5;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blanc) !important;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    transition: color 0.3s ease;
+    color: var(--blanc) !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--jaune-light) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--rose-primary) 0%, var(--jaune-primary) 100%);
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    color: var(--blanc);
+}
+
+/* Product Cards */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.1);
+    background: var(--blanc);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+}
+
+.product-card .card-img-top {
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--rose-primary) 0%, var(--jaune-primary) 100%);
+    border: none;
+    color: var(--blanc);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--rose-dark) 0%, var(--jaune-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+    color: var(--blanc);
+}
+
+.btn-outline-primary {
+    border: 2px solid var(--rose-primary);
+    color: var(--rose-primary);
+    background: var(--blanc);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--rose-primary);
+    border-color: var(--rose-primary);
+    transform: translateY(-2px);
+    color: var(--blanc);
+}
+
+/* Cards */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.1);
+    transition: all 0.3s ease;
+    background: var(--blanc);
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.15);
+}
+
+/* Badges */
+.badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+/* Forms */
+.form-control {
+    border-radius: 8px;
+    border: 2px solid var(--gris-clair);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: var(--blanc);
+}
+
+.form-control:focus {
+    border-color: var(--rose-primary);
+    box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25);
+}
+
+/* Footer */
+footer {
+    background: linear-gradient(135deg, var(--rose-dark) 0%, var(--jaune-dark) 100%);
+    color: var(--blanc);
+}
+
+footer a {
+    transition: color 0.3s ease;
+    color: var(--blanc) !important;
+}
+
+footer a:hover {
+    color: var(--jaune-light) !important;
+}
+
+/* Social Links */
+.social-links a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    color: var(--blanc);
+}
+
+.social-links a:hover {
+    background-color: var(--jaune-primary);
+    transform: translateY(-3px);
+    color: var(--blanc);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Loading Spinner */
+.spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Cart Badge */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--danger-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wishlist Button */
+.wishlist-btn {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--rose-primary);
+}
+
+.wishlist-btn:hover {
+    background-color: var(--rose-primary);
+    color: var(--blanc);
+}
+
+.wishlist-btn.active {
+    background-color: var(--rose-primary);
+    color: var(--blanc);
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* Category Cards */
+.category-card {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-radius: 12px;
+    background: var(--blanc);
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid var(--gris-clair);
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.2);
+    border-color: var(--rose-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 400px;
+        text-align: center;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: linear-gradient(135deg, var(--rose-primary) 0%, var(--jaune-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--rose-primary) 0%, var(--jaune-primary) 100%);
+}
+
+.bg-gradient-rose {
+    background: linear-gradient(135deg, var(--rose-primary) 0%, var(--rose-light) 100%);
+}
+
+.bg-gradient-jaune {
+    background: linear-gradient(135deg, var(--jaune-primary) 0%, var(--jaune-light) 100%);
+}
+
+.shadow-soft {
+    box-shadow: 0 2px 10px rgba(233, 30, 99, 0.1);
+}
+
+.shadow-hover {
+    transition: box-shadow 0.3s ease;
+}
+
+.shadow-hover:hover {
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.15);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gris-clair);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rose-primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--rose-dark);
+}

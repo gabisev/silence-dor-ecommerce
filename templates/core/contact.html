@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - Silence d'Or{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="text-center mb-5">Contactez-nous</h1>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Informations de contact</h3>
+                    <div class="mb-4">
+                        <h5><i class="fas fa-map-marker-alt text-primary me-2"></i>Adresse</h5>
+                        <p class="text-muted">{{ contact_address|linebreaks }}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-phone text-primary me-2"></i>Téléphone</h5>
+                        <p class="text-muted">{{ contact_phone }}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-envelope text-primary me-2"></i>Email</h5>
+                        <p class="text-muted">{{ contact_email }}</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-clock text-primary me-2"></i>Horaires</h5>
+                        <p class="text-muted">
+                            Lundi - Vendredi: 9h00 - 18h00<br>
+                            Samedi: 10h00 - 16h00<br>
+                            Dimanche: Fermé
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <h3>Envoyez-nous un message</h3>
+                    <form>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nom complet</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Sujet</label>
+                            <input type="text" class="form-control" id="subject" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3>FAQ</h3>
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Comment passer une commande ?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Pour passer une commande, ajoutez simplement les produits de votre choix à votre panier, puis procédez au checkout. Vous pourrez choisir votre adresse de livraison et votre méthode de paiement.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Quels sont les délais de livraison ?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Les délais de livraison varient selon votre localisation. En général, comptez 2-5 jours ouvrés pour la France métropolitaine. La livraison est gratuite à partir de 50€ d'achat.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    Puis-je retourner un produit ?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Oui, vous disposez de 14 jours pour retourner un produit non conforme ou défectueux. Les frais de retour sont à notre charge dans ce cas.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

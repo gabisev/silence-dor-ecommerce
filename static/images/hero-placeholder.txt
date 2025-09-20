@@ -1,0 +1,5 @@
+Image de démonstration pour le hero
+Remplacez ce fichier par une vraie image hero-image.jpg
+Dimensions recommandées: 800x600px
+Format: JPG ou PNG
+

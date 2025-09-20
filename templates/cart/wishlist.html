@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Ma Liste de Souhaits - Silence d'Or{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Ma Liste de Souhaits</h2>
+    
+    {% if wishlist_items %}
+    <div class="row">
+        {% for item in wishlist_items %}
+        <div class="col-md-3 mb-4">
+            <div class="card product-card">
+                {% if item.product.images.first %}
+                    <img src="{{ item.product.images.first.image.url }}" class="card-img-top" alt="{{ item.product.name }}">
+                {% else %}
+                    <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <span class="text-muted">Pas d'image</span>
+                    </div>
+                {% endif %}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.product.name }}</h5>
+                    <p class="card-text text-muted">{{ item.product.category.name }}</p>
+                    <p class="card-text"><strong>{{ item.product.price }}€</strong></p>
+                    
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'products:product-detail' item.product.slug %}" class="btn btn-outline-primary btn-sm">Voir</a>
+                        <form method="post" action="{% url 'cart:add-to-cart' item.product.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-primary btn-sm">Ajouter au panier</button>
+                        </form>
+                        <form method="post" action="{% url 'cart:remove-from-wishlist' item.product.id %}" class="d-inline">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Supprimer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="text-center py-5">
+        <h3>Votre liste de souhaits est vide</h3>
+        <p class="text-muted">Ajoutez des produits à votre liste de souhaits pour les retrouver facilement.</p>
+        <a href="{% url 'products:product-list' %}" class="btn btn-primary">Voir les produits</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

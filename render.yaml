@@ -1,0 +1,143 @@
+services:
+  # Service web principal
+  - type: web
+    name: silence-dor-web
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput --settings=silence_dor.settings_production
+      python manage.py migrate --settings=silence_dor.settings_production
+    startCommand: gunicorn silence_dor.wsgi:application --bind 0.0.0.0:$PORT --settings=silence_dor.settings_production
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: silence_dor.settings_production
+      - key: DEBUG
+        value: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: silence-dor.onrender.com,www.silence-dor.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: silence-dor-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: EMAIL_HOST
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: 587
+      - key: EMAIL_USE_TLS
+        value: true
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        value: noreply@silence-dor.com
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: SENTRY_DSN
+        sync: false
+    healthCheckPath: /health/
+    autoDeploy: true
+
+  # Service Celery Worker
+  - type: worker
+    name: silence-dor-worker
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: celery -A silence_dor worker --loglevel=info
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: silence_dor.settings_production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: silence-dor-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+    autoDeploy: true
+
+  # Service Celery Beat (scheduler)
+  - type: worker
+    name: silence-dor-beat
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt
+    startCommand: celery -A silence_dor beat --loglevel=info
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DJANGO_SETTINGS_MODULE
+        value: silence_dor.settings_production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: silence-dor-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: silence-dor-redis
+          property: connectionString
+    autoDeploy: true
+
+databases:
+  # Base de données PostgreSQL
+  - name: silence-dor-db
+    plan: starter
+    databaseName: silence_dor
+    user: silence_dor_user
+
+  # Cache Redis
+  - name: silence-dor-redis
+    plan: starter
+    maxmemoryPolicy: allkeys-lru

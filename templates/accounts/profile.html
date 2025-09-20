@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Mon Profil - Silence d'Or{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Mon Compte</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="{% url 'accounts:profile' %}" class="list-group-item list-group-item-action active">Profil</a>
+                    <a href="{% url 'accounts:profile-update' %}" class="list-group-item list-group-item-action">Modifier le profil</a>
+                    <a href="{% url 'accounts:address-create' %}" class="list-group-item list-group-item-action">Ajouter une adresse</a>
+                    <a href="{% url 'orders:order-list' %}" class="list-group-item list-group-item-action">Mes commandes</a>
+                    <a href="{% url 'cart:wishlist' %}" class="list-group-item list-group-item-action">Liste de souhaits</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Informations personnelles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Nom :</strong> {{ user.get_full_name }}</p>
+                            <p><strong>Email :</strong> {{ user.email }}</p>
+                            <p><strong>Date d'inscription :</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            {% if profile %}
+                                <p><strong>Téléphone :</strong> {{ profile.phone|default:"Non renseigné" }}</p>
+                                <p><strong>Date de naissance :</strong> {{ profile.date_of_birth|date:"d/m/Y"|default:"Non renseignée" }}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'accounts:profile-update' %}" class="btn btn-primary">Modifier le profil</a>
+                    </div>
+                </div>
+            </div>
+            
+            {% if addresses %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5>Mes adresses</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for address in addresses %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6>{{ address.get_type_display }}</h6>
+                                    <p>
+                                        {{ address.first_name }} {{ address.last_name }}<br>
+                                        {{ address.address_line_1 }}<br>
+                                        {% if address.address_line_2 %}{{ address.address_line_2 }}<br>{% endif %}
+                                        {{ address.city }}, {{ address.postal_code }}<br>
+                                        {{ address.country }}
+                                    </p>
+                                    <a href="{% url 'accounts:address-update' address.pk %}" class="btn btn-sm btn-outline-primary">Modifier</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'accounts:address-create' %}" class="btn btn-primary">Ajouter une adresse</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+

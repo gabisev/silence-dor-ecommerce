@@ -1,0 +1,63 @@
+# Django et extensions
+Django==4.2.7
+django-environ==0.11.2
+django-crispy-forms==2.1
+crispy-bootstrap5==0.7
+
+# Base de données
+psycopg2-binary==2.9.9
+
+# Authentification et sécurité
+django-allauth==0.57.0
+django-cors-headers==4.3.1
+
+# API REST
+djangorestframework==3.14.0
+django-filter==23.5
+
+# Paiements
+stripe==7.8.0
+
+# Images et médias
+Pillow==10.1.0
+
+# Tâches asynchrones
+celery==5.3.4
+redis==5.0.1
+
+# Sécurité avancée
+pyotp==2.9.0
+qrcode[pil]==7.4.2
+
+# Analytics et tracking
+django-analytics==0.1.0
+
+# Internationalisation
+django-modeltranslation==0.18.11
+
+# Cache
+django-redis==5.4.0
+
+# Logging
+structlog==23.2.0
+
+# Monitoring
+sentry-sdk[django]==1.38.0
+
+# Utilitaires
+python-decouple==3.8
+whitenoise==6.6.0
+gunicorn==21.2.0
+
+# Développement (optionnel)
+django-debug-toolbar==4.2.0
+django-extensions==3.2.3
+
+# Tests
+pytest==7.4.3
+pytest-django==4.7.0
+factory-boy==3.3.0
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.4.8
