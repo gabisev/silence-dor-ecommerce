@@ -30,7 +30,7 @@ pyotp==2.9.0
 qrcode[pil]==7.4.2
 
 # Analytics et tracking
-django-analytics==0.1.0
+# django-analytics==0.1.0  # Package inexistant, supprimé
 
 # Internationalisation
 django-modeltranslation==0.18.11
@@ -49,15 +49,15 @@ python-decouple==3.8
 whitenoise==6.6.0
 gunicorn==21.2.0
 
-# Développement (optionnel)
-django-debug-toolbar==4.2.0
-django-extensions==3.2.3
+# Développement (optionnel) - Commenté pour la production
+# django-debug-toolbar==4.2.0
+# django-extensions==3.2.3
 
-# Tests
-pytest==7.4.3
-pytest-django==4.7.0
-factory-boy==3.3.0
+# Tests - Commenté pour la production
+# pytest==7.4.3
+# pytest-django==4.7.0
+# factory-boy==3.3.0
 
-# Documentation
-mkdocs==1.5.3
-mkdocs-material==9.4.8
+# Documentation - Commenté pour la production
+# mkdocs==1.5.3
+# mkdocs-material==9.4.8
