@@ -6,6 +6,7 @@ crispy-bootstrap5==0.7
 
 # Base de données
 psycopg2-binary==2.9.9
+dj-database-url==2.1.0
 
 # Authentification et sécurité
 django-allauth==0.57.0
