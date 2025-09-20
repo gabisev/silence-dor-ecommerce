@@ -100,9 +100,9 @@ WSGI_APPLICATION = 'silence_dor.wsgi.application'
 DATABASE_URL = config('DATABASE_URL', default='')
 
 if DATABASE_URL:
-    # Utiliser dj_database_url pour PostgreSQL/MySQL
+    # Utiliser dj_database_url pour PostgreSQL/MySQL avec psycopg3
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, conn_health_checks=True)
     }
 else:
     # Fallback SQLite pour le développement
