@@ -27,11 +27,7 @@
                 <a href="{% url 'products:product-list' %}" class="btn btn-light btn-lg" style="background: white; color: #e91e63; border: 2px solid white;">Découvrir nos produits</a>
             </div>
             <div class="col-lg-6">
-                {% if hero_image %}
-                    <img src="{{ hero_image.url }}" alt="{{ site_name }}" class="img-fluid rounded">
-                {% else %}
-                    <img src="{% static 'images/hero-image.svg' %}" alt="{{ site_name }}" class="img-fluid rounded">
-                {% endif %}
+                <img src="{% static 'images/hero-image.svg' %}" alt="{{ site_name }}" class="img-fluid rounded" style="max-width: 100%; height: auto;">
             </div>
         </div>
     </div>
