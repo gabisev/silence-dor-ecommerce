@@ -2,18 +2,21 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . import health
+from django.http import HttpResponse
+
+def health_check(request):
+    return HttpResponse("OK", status=200)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('health/', health.health_check, name='health_check'),
+    path('health/', health_check, name='health_check'),
     path('', include('apps.core.urls')),
     path('products/', include('apps.products.urls')),
     path('accounts/', include('apps.accounts.urls')),
     path('orders/', include('apps.orders.urls')),
     path('cart/', include('apps.cart.urls')),
     
-    # Nouvelles fonctionnalités avancées
+    # Nouvelles fonctionnalitï¿½s avancï¿½es
     path('analytics/', include('apps.analytics.urls')),
     path('search/', include('apps.search.urls')),
     path('notifications/', include('apps.notifications.urls')),
