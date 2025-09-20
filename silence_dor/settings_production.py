@@ -240,6 +240,12 @@ SECURE_HSTS_SECONDS = 31536000 if not DEBUG else 0
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
 
+# CSRF settings
+CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_TRUSTED_ORIGINS = config('CSRF_TRUSTED_ORIGINS', default='https://silence-dor-ecommerce.onrender.com,https://*.onrender.com').split(',')
+
 # HTTPS settings (pour la production)
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
