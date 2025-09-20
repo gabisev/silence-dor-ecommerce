@@ -188,6 +188,9 @@ STRIPE_PUBLISHABLE_KEY = config('STRIPE_PUBLISHABLE_KEY', default='')
 STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY', default='')
 STRIPE_WEBHOOK_SECRET = config('STRIPE_WEBHOOK_SECRET', default='')
 
+# Redis configuration - Désactiver par défaut
+USE_REDIS = config('USE_REDIS', default=False, cast=bool)
+
 # Celery configuration - Désactivé si Redis n'est pas disponible
 if USE_REDIS:
     CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='redis://localhost:6379/0')
@@ -202,8 +205,6 @@ else:
     CELERY_TASK_EAGER_PROPAGATES = True
 
 # Cache configuration - Utiliser le cache en mémoire au lieu de Redis
-USE_REDIS = config('USE_REDIS', default=False, cast=bool)
-
 if USE_REDIS:
     # Configuration Redis (si disponible)
     CACHES = {
