@@ -5,7 +5,7 @@ django-crispy-forms==2.1
 crispy-bootstrap5==0.7
 
 # Base de données
-psycopg[binary]==3.1.18
+psycopg[binary]==3.2.10
 dj-database-url==2.1.0
 
 # Authentification et sécurité
